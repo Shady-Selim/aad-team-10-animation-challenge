@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation_graph"
+    app:startDestination="@id/regionFragment">
+    <fragment
+        android:id="@+id/regionFragment"
+        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.RegionFragment"
+        android:label="fragment_region_list"
+        tools:layout="@layout/fragment_region_list" >
+        <action
+            android:id="@+id/action_regionFragment_to_countryFragment"
+            app:destination="@id/countryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryFragment"
+        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CountryFragment"
+        android:label="fragment_country_list"
+        tools:layout="@layout/fragment_country_list" >
+        <action
+            android:id="@+id/action_countryFragment_to_cityFragment"
+            app:destination="@id/cityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cityFragment"
+        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CityFragment"
+        android:label="fragment_city_list"
+        tools:layout="@layout/fragment_city_list" >
+        <action
+            android:id="@+id/action_cityFragment_to_cityForecast"
+            app:destination="@id/cityForecast" />
+    </fragment>
+    <fragment
+        android:id="@+id/cityForecast"
+        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CityForecast"
+        android:label="city_forecast_fragment"
+        tools:layout="@layout/city_forecast_fragment" />
+</navigation>
