@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/forecast_item_today_background_color"
+    android:paddingBottom="16dp"
+    android:paddingTop="16dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/divider_guideline_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        tools:layout_editor_absoluteX="192dp"
+        tools:layout_editor_absoluteY="0dp"/>
+
+    <TextView
+        android:id="@+id/tv_city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="22sp"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Cairo" />
+
+    <TextView
+        android:id="@+id/tv_forecast_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_date_time_id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Today, April 03" />
+
+    <ImageView
+        android:id="@+id/iv_forecast_icon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/divider_guideline_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/tv_city_name"
+        app:layout_constraintVertical_bias="0.26999998"
+        tools:src="@drawable/cloud_image_fore_test" />
+
+    <TextView
+        android:id="@+id/tv_forecast_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_forecast_date"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintLeft_toLeftOf="@+id/iv_forecast_icon"
+        app:layout_constraintRight_toRightOf="@+id/iv_forecast_icon"
+        app:layout_constraintTop_toBottomOf="@+id/iv_forecast_icon"
+        tools:text="Rainy" />
+
+    <TextView
+        android:id="@+id/tv_high_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#ffffff"
+        android:textSize="72sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_forecast_icon"
+        app:layout_constraintEnd_toStartOf="@+id/divider_guideline_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/iv_forecast_icon"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="19\u00b0" />
+
+    <TextView
+        android:id="@+id/tv_low_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#ffffff"
+        android:textSize="36sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_forecast_description"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_high_temperature"
+        app:layout_constraintRight_toRightOf="@+id/tv_high_temperature"
+        tools:text="10\u00b0"/>
+
+    <TextView
+        android:id="@+id/tv_date_time_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="10-19-2019"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="sans-serif"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textColor="#ffffff"
+        android:textSize="18sp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
