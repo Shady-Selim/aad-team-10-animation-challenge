@@ -1,0 +1,190 @@
+[
+  {
+    "Name": "MENA",
+    "Countries": [
+      {
+        "Name": "Egypt",
+        "Cities": [
+          {
+            "Name": "Cairo",
+            "Zip": 11
+          },
+          {
+            "Name": "Alexandria",
+            "Zip": 11
+          }
+        ],
+        "Short": "egy"
+      },
+      {
+        "Name": "Saudi Arabia",
+        "Short": "sau",
+        "Cities": [
+          {
+            "Name": "Riyadh",
+            "Zip": 11
+          },
+          {
+            "Name": "Mecca",
+            "Zip": 11
+          }
+        ]
+      },
+      {
+        "Name": "United Emirates",
+        "Short": "are",
+        "Cities": [
+          {
+            "Name": "Abu Dhabi",
+            "Zip": 11
+          },
+          {
+            "Name": "Dubai",
+            "Zip": 11
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Africa",
+    "Countries": [
+      {
+        "Name": "Nigeria",
+        "Cities": [
+          {
+            "Name": "Abuja",
+            "Zip": 11
+          },
+          {
+            "Name": "Lagos",
+            "Zip": 11
+          }
+        ],
+        "Short": "nga"
+      },
+      {
+        "Name": "Rwanda",
+        "Short": "rwa",
+        "Cities": [
+          {
+            "Name": "Kigali",
+            "Zip": 11
+          },
+          {
+            "Name": "Byumba",
+            "Zip": 11
+          }
+        ]
+      },
+      {
+        "Name": "South Africa",
+        "Short": "saf",
+        "Cities": [
+          {
+            "Name": "Pretoria",
+            "Zip": 11
+          },
+          {
+            "Name": "Cape Town",
+            "Zip": 11
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Asia",
+    "Countries": [
+      {
+        "Name": "China",
+        "Cities": [
+          {
+            "Name": "Beijing",
+            "Zip": 11
+          },
+          {
+            "Name": "Hong Kong",
+            "Zip": 11
+          }
+        ],
+        "Short": "chn"
+      },
+      {
+        "Name": "India",
+        "Short": "ind",
+        "Cities": [
+          {
+            "Name": "New Delhi",
+            "Zip": 11
+          },
+          {
+            "Name": "Mumbai",
+            "Zip": 11
+          }
+        ]
+      },
+      {
+        "Name": "Pakistan",
+        "Short": "pak",
+        "Cities": [
+          {
+            "Name": "Islamabad",
+            "Zip": 11
+          },
+          {
+            "Name": "Karachi",
+            "Zip": 11
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Name": "Europe",
+    "Countries": [
+      {
+        "Name": "Finland",
+        "Cities": [
+          {
+            "Name": "Helsinki",
+            "Zip": 11
+          },
+          {
+            "Name": "Espoo",
+            "Zip": 11
+          }
+        ],
+        "Short": "fin"
+      },
+      {
+        "Name": "Germany",
+        "Short": "deu",
+        "Cities": [
+          {
+            "Name": " Berlin ",
+            "Zip": 11
+          },
+          {
+            "Name": "Munich",
+            "Zip": 11
+          }
+        ]
+      },
+      {
+        "Name": "United Kingdom",
+        "Short": "gbr",
+        "Cities": [
+          {
+            "Name": "London",
+            "Zip": 11
+          },
+          {
+            "Name": "Manchester",
+            "Zip": 11
+          }
+        ]
+      }
+    ]
+  }
+]
