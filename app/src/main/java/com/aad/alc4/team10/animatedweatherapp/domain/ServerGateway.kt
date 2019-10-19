@@ -1,6 +1,6 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.domain
 
-import com.aad.alc4.team10.animatedweatherapp.BuildConfig
+import com.aad.alc4.team10.animatedweatherapp.BuildConfig.API_KEY
 import com.aad.alc4.team10.animatedweatherapp.ui.ForecastsResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 
 private const val APP_ID_KEY = "appid"
-private const val APP_ID_VALUE = BuildConfig.API_KEY
+private const val APP_ID_VALUE = API_KEY
 private const val OPEN_WEATHER_MAPS_URL = "https://api.openweathermap.org"
 
 interface ServerApi {
