@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 import com.aad.alc4.team10.animatedweatherapp.R
+import com.aad.alc4.team10.animatedweatherapp.ui.main.forecast_Screen.CityForecastViewModel
 import com.aad.alc4.team10.animatedweatherapp.ui.main.model.Forecast
 
 class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandler {
