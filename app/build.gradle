@@ -15,12 +15,12 @@ android {
     buildToolsVersion "28.0.3"
     defaultConfig {
         applicationId "com.aad.alc4.team10.animatedweatherapp"
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_KEY", API_KEY)
+        buildConfigField("String", "API_KEY", "4008a511c752d5fb85047b47c45aa05c")
     }
     buildTypes {
         release {
