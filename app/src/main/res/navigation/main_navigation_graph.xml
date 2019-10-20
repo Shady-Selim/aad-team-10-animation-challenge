@@ -39,5 +39,9 @@
         android:id="@+id/cityForecast"
         android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.forecast_Screen.CityForecast"
         android:label="city_forecast_fragment"
-        tools:layout="@layout/city_forecast_fragment" />
+        tools:layout="@layout/city_forecast_fragment" >
+        <argument
+            android:name="city"
+            app:argType="com.aad.alc4.team10.animatedweatherapp.model.City" />
+    </fragment>
 </navigation>

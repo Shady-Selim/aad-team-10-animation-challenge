@@ -1,6 +1,5 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
 
@@ -24,7 +24,6 @@ class CityFragment : Fragment() {
 
     private var cities: ArrayList<City>? = arrayListOf()
 
-    private var listener: OnListFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +46,7 @@ class CityFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager =  LinearLayoutManager(context)
+                adapter = MyCityRecyclerViewAdapter(cities){findNavController().navigate(CityFragmentDirections.actionCityFragmentToCityForecast(it))}
             }
         }
         return view
