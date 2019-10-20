@@ -1,8 +1,6 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen
 
 import Region
-import android.annotation.SuppressLint
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +9,7 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
 
 class RegionViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
