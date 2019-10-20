@@ -1,4 +1,4 @@
-package com.aad.alc4.team10.animatedweatherapp.ui.main.forecast_Screen
+package com.aad.alc4.team10.animatedweatherapp.ui.main
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,39 +6,46 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+
 import com.aad.alc4.team10.animatedweatherapp.R
-import com.aad.alc4.team10.animatedweatherapp.ui.City
-import com.aad.alc4.team10.animatedweatherapp.ui.Forecast
-import com.aad.alc4.team10.animatedweatherapp.ui.Weather
-import com.aad.alc4.team10.animatedweatherapp.ui.main.forecast_Screen.utils.ForecastUtils
+import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyForecasts
+import com.aad.alc4.team10.animatedweatherapp.ui.main.model.City
+import com.aad.alc4.team10.animatedweatherapp.ui.main.model.Forecast
+import com.aad.alc4.team10.animatedweatherapp.ui.main.model.ForecastDetails
+import com.aad.alc4.team10.animatedweatherapp.ui.main.model.ForecastsResponse
+import com.aad.alc4.team10.animatedweatherapp.ui.main.model.Weather
+import com.aad.alc4.team10.animatedweatherapp.ui.main.utils.ForecastUtils
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 class CityForecastAdapter(
-    private val forecastsLiveData: LiveData<List<Forecast>>,
-    private val cityLiveData: LiveData<City>,
-    owner: LifecycleOwner,
     private val mContext: Context,
     private val mClickHandler: ForecastAdapterOnClickHandler
 ) : RecyclerView.Adapter<CityForecastAdapter.CityForecastAdapterViewHolder>() {
 
-    private lateinit var mWeathers: List<Weather>
+    private val mForecastList: List<Forecast>?
+    private val dummyForecasts: ForecastsResponse
+    private var mWeathers: List<Weather>? = null
 
     private val mUseTodayLayout: Boolean
+
+    private var mCity: City? = null
 
     interface ForecastAdapterOnClickHandler {
         fun onClick(forecast: Forecast)
     }
 
     init {
-        forecastsLiveData.observe(owner, androidx.lifecycle.Observer { notifyDataSetChanged() })
-        cityLiveData.observe(owner, androidx.lifecycle.Observer { notifyDataSetChanged() })
         mUseTodayLayout = mContext.resources.getBoolean(R.bool.use_today_layout)
-
+        val gson = Gson()
+        dummyForecasts =
+            gson.fromJson(DummyForecasts.forecastJsnonFile, ForecastsResponse::class.java)
+        mForecastList = dummyForecasts.forecasts
     }
 
     override fun onCreateViewHolder(
@@ -69,13 +76,13 @@ class CityForecastAdapter(
     }
 
     override fun onBindViewHolder(holder: CityForecastAdapterViewHolder, position: Int) {
-        mWeathers = forecastsLiveData.value!![position].weather!!
+        mWeathers = mForecastList!![position].weather
         val (_, date, dateText, forecastDetails) = getItemAtPosition(position)
 
-        val weather = mWeathers[0]
+        val weather = mWeathers!![0]
 
 
-        val weatherId = forecastsLiveData.value!![0].weather!![0].id!!.toInt()
+        val weatherId = dummyForecasts.forecasts!![0].weather!![0].id!!.toInt()
 
         val viewType = getItemViewType(position)
         val weatherImageId: Int
@@ -85,8 +92,9 @@ class CityForecastAdapter(
             VIEW_TYPE_TODAY -> {
                 weatherImageId = ForecastUtils
                     .getLargeArtResourceIdForWeatherCondition(weatherId)
-                val cityName = cityLiveData.value!!.name
-                val countryName = cityLiveData.value!!.country
+                mCity = dummyForecasts.city
+                val cityName = mCity!!.name
+                val countryName = mCity!!.country
 
                 holder.cityName.text = "$cityName , $countryName"
             }
@@ -124,11 +132,11 @@ class CityForecastAdapter(
     }
 
     override fun getItemCount(): Int {
-        return forecastsLiveData.value?.size ?: 0
+        return mForecastList?.size ?: 0
     }
 
     fun getItemAtPosition(position: Int): Forecast {
-        return forecastsLiveData.value!![position]
+        return mForecastList!![position]
     }
 
     override fun getItemViewType(position: Int): Int {
