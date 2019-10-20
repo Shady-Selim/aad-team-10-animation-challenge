@@ -1,4 +1,4 @@
-package com.aad.alc4.team10.animatedweatherapp.ui.main
+package com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.TextView
 import com.aad.alc4.team10.animatedweatherapp.R
 
 
-import com.aad.alc4.team10.animatedweatherapp.ui.main.CountryFragment.OnListFragmentInteractionListener
+import com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen.CountryFragment.OnListFragmentInteractionListener
 import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_country.view.*

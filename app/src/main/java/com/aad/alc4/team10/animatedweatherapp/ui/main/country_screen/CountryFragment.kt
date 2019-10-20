@@ -1,4 +1,4 @@
-package com.aad.alc4.team10.animatedweatherapp.ui.main
+package com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen
 
 import android.content.Context
 import android.os.Bundle
@@ -47,7 +47,11 @@ class CountryFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyCountryRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter =
+                    MyCountryRecyclerViewAdapter(
+                        DummyContent.ITEMS,
+                        listener
+                    )
             }
         }
         return view

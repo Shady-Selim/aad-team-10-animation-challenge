@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/countryFragment"
-        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CountryFragment"
+        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen.CountryFragment"
         android:label="fragment_country_list"
         tools:layout="@layout/fragment_country_list" >
         <action
