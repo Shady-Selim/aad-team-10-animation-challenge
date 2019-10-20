@@ -34,7 +34,7 @@ class CityFragment : Fragment() {
             cities = it.getParcelableArrayList(ARG_CITIES)
         }
 
-        list.adapter = MyCityRecyclerViewAdapter(cities, listener)
+        //list.adapter = MyCityRecyclerViewAdapter(cities, listener)
     }
 
     override fun onCreateView(
