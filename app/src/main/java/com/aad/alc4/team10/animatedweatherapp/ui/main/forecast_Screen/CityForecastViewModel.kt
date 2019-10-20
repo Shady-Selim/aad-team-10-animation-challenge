@@ -26,6 +26,8 @@ class CityForecastViewModel(
         get() = _forecasts
     val error: LiveData<Boolean>
         get() = _error
+    val city: LiveData<City>
+        get() = _city
 
     fun loadForecast(cityId: String) =
         viewModelScope.launch {
