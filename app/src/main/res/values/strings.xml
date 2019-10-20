@@ -5,6 +5,6 @@
     <string name="format_temperature">
         <xliff:g id="temp">%1.0f</xliff:g>\u00B0
     </string>
-    <string name="error">Error while fetching the forecast..</string>
+    <string name="error">Error</string>
     <string name="try_again">Try Again</string>
 </resources>
