@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_city_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="22sp"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Cairo"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/iv_forecast_icon"
+        android:layout_width="@dimen/list_icon"
+        android:layout_height="@dimen/list_icon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:src="@drawable/cloud_image_fore_test"/>
+
+    <TextView
+        android:id="@+id/tv_forecast_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintLeft_toRightOf="@+id/iv_forecast_icon"
+        tools:text="Today, April 03"
+        android:textColor="@color/primary_text"/>
+
+    <TextView
+        android:id="@+id/tv_forecast_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_forecast_date"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:text="Rainy"/>
+
+    <TextView
+        android:id="@+id/tv_high_temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/forecast_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintRight_toLeftOf="@+id/tv_low_temperature"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:text="19\u00b0" />
+
+    <TextView
+        android:id="@+id/tv_low_temperature"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="end"
+        android:textSize="@dimen/forecast_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:text="10\u00b0"
+        android:textColor="@color/secondary_text"/>
+
+    <TextView
+        android:id="@+id/tv_date_time_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="10-19-2019"
+        android:textColor="@color/secondary_text"
+        app:layout_constraintStart_toStartOf="@+id/tv_forecast_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_forecast_description" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
