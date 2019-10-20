@@ -8,14 +8,11 @@ import android.widget.TextView
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
 
-
-import com.aad.alc4.team10.animatedweatherapp.ui.main.CityFragment.OnListFragmentInteractionListener
-
 import kotlinx.android.synthetic.main.fragment_city.view.*
 
 class MyCityRecyclerViewAdapter(
     private val mCities: List<City>?,
-    private val mListener: OnListFragmentInteractionListener?
+    private val onClick: (City) -> Unit ?
 ) : RecyclerView.Adapter<MyCityRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
@@ -25,7 +22,7 @@ class MyCityRecyclerViewAdapter(
             val city = v.tag as City
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
-            mListener?.onListFragmentInteraction(city)
+            onClick(city)
         }
     }
 
