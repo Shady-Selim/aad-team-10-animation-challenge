@@ -1,4 +1,4 @@
-package com.aad.alc4.team10.animatedweatherapp.ui.main.utils
+package com.aad.alc4.team10.animatedweatherapp.ui.main.forecast_Screen.utils
 
 import android.content.Context
 

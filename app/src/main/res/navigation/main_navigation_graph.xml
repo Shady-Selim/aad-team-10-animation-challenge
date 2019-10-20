@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/regionFragment">
+    app:startDestination="@id/cityForecast">
     <fragment
         android:id="@+id/regionFragment"
         android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.RegionFragment"
