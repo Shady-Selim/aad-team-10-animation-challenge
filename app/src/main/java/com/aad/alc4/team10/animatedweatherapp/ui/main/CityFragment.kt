@@ -32,7 +32,6 @@ class CityFragment : Fragment() {
             cities = it.getParcelableArrayList(ARG_CITIES)
         }
 
-        list.adapter = MyCityRecyclerViewAdapter(cities, listener)
     }
 
     override fun onCreateView(
@@ -45,6 +44,7 @@ class CityFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager =  LinearLayoutManager(context)
+                adapter = MyCityRecyclerViewAdapter(cities, listener)
             }
         }
         return view
@@ -55,7 +55,7 @@ class CityFragment : Fragment() {
         if (context is OnListFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 

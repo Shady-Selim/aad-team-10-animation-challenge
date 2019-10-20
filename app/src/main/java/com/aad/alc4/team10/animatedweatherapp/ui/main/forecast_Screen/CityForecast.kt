@@ -62,6 +62,7 @@ class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandl
     }
 
     private fun onLoading(loading: Boolean) {
+        rv_city_forecasts_list.visibility = if (loading) View.GONE else View.VISIBLE
         pb_loading.visibility = if (loading) View.VISIBLE else View.GONE
     }
 
