@@ -2,7 +2,6 @@ package com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen
 
 import Region
 import android.graphics.Bitmap
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
 
 fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).generate()

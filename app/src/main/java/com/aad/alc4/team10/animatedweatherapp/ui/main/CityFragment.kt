@@ -2,16 +2,14 @@ package com.aad.alc4.team10.animatedweatherapp.ui.main
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
-
-import kotlinx.android.synthetic.main.fragment_city_list.*
 
 /**
  * A fragment representing a list of Items.
@@ -34,7 +32,6 @@ class CityFragment : Fragment() {
             cities = it.getParcelableArrayList(ARG_CITIES)
         }
 
-        list.adapter = MyCityRecyclerViewAdapter(cities, listener)
     }
 
     override fun onCreateView(
@@ -47,6 +44,7 @@ class CityFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager =  LinearLayoutManager(context)
+                adapter = MyCityRecyclerViewAdapter(cities, listener)
             }
         }
         return view
@@ -57,7 +55,7 @@ class CityFragment : Fragment() {
         if (context is OnListFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 
