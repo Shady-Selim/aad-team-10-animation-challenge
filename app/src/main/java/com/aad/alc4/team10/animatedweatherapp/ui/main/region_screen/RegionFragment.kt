@@ -1,4 +1,4 @@
-package com.aad.alc4.team10.animatedweatherapp.ui.main
+package com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen
 
 import android.content.Context
 import android.os.Bundle
@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.aad.alc4.team10.animatedweatherapp.R
+import com.aad.alc4.team10.animatedweatherapp.ui.main.MainViewModel
 
-import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent
 import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
 
 /**
@@ -55,7 +55,7 @@ class RegionFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyRegionRecyclerViewAdapter(DummyContent.ITEMS, listener)
+              //  adapter = MyRegionRecyclerViewAdapter(DummyContent.ITEMS, listener)
             }
         }
         return view

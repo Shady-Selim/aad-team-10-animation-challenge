@@ -6,7 +6,7 @@
     app:startDestination="@id/cityForecast">
     <fragment
         android:id="@+id/regionFragment"
-        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.RegionFragment"
+        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.RegionFragment"
         android:label="fragment_region_list"
         tools:layout="@layout/fragment_region_list" >
         <action
