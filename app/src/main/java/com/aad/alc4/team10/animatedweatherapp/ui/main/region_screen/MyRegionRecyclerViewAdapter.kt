@@ -25,7 +25,7 @@ class RegionViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
 
 class MyRegionRecyclerViewAdapter(
     lifecycleOwner: LifecycleOwner,
-    private val regions: MutableLiveData<List<Region>>,
+    private val regions: MutableLiveData<List<Region>?>,
     private val onClick: (Region) -> Unit
 ) : RecyclerView.Adapter<RegionViewHolder>() {
 

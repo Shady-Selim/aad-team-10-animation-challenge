@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.aad.alc4.team10.animatedweatherapp.domain.FetchRegionUseCase
 
 class RegionsViewModel(
-    private val fetchRegionUseCase: FetchRegionUseCase
+    private val fetchRegionUseCase: FetchRegionUseCase=FetchRegionUseCase()
 ) : ViewModel() {
     val regionsLiveData = MutableLiveData<List<Region>?>()
 
