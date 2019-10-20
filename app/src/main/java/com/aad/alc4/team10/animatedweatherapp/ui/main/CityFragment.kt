@@ -2,17 +2,14 @@ package com.aad.alc4.team10.animatedweatherapp.ui.main
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
-
-import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent
-import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
+import com.aad.alc4.team10.animatedweatherapp.model.City
 
 /**
  * A fragment representing a list of Items.
@@ -21,8 +18,9 @@ import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyIt
  */
 class CityFragment : Fragment() {
 
-    // TODO: Customize parameters
     private var columnCount = 1
+
+    private var cities: ArrayList<City>? = arrayListOf()
 
     private var listener: OnListFragmentInteractionListener? = null
 
@@ -31,7 +29,9 @@ class CityFragment : Fragment() {
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
+            cities = it.getParcelableArrayList(ARG_CITIES)
         }
+
     }
 
     override fun onCreateView(
@@ -43,11 +43,8 @@ class CityFragment : Fragment() {
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyCityRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                layoutManager =  LinearLayoutManager(context)
+                adapter = MyCityRecyclerViewAdapter(cities, listener)
             }
         }
         return view
@@ -58,7 +55,7 @@ class CityFragment : Fragment() {
         if (context is OnListFragmentInteractionListener) {
             listener = context
         } else {
-            throw RuntimeException(context.toString() + " must implement OnListFragmentInteractionListener")
+            throw RuntimeException("$context must implement OnListFragmentInteractionListener")
         }
     }
 
@@ -79,16 +76,14 @@ class CityFragment : Fragment() {
      * for more information.
      */
     interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
+        fun onListFragmentInteraction(item: City?)
     }
 
     companion object {
 
-        // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
+        const val ARG_CITIES = "cities"
 
-        // TODO: Customize parameter initialization
         @JvmStatic
         fun newInstance(columnCount: Int) =
             CityFragment().apply {
