@@ -11,8 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
 
-import kotlinx.android.synthetic.main.fragment_city_list.*
-
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
@@ -33,7 +31,6 @@ class CityFragment : Fragment() {
             cities = it.getParcelableArrayList(ARG_CITIES)
         }
 
-        list.adapter = MyCityRecyclerViewAdapter(cities){findNavController().navigate(CityFragmentDirections.actionCityFragmentToCityForecast(it))}
     }
 
     override fun onCreateView(
@@ -46,6 +43,7 @@ class CityFragment : Fragment() {
         if (view is RecyclerView) {
             with(view) {
                 layoutManager =  LinearLayoutManager(context)
+                adapter = MyCityRecyclerViewAdapter(cities){findNavController().navigate(CityFragmentDirections.actionCityFragmentToCityForecast(it))}
             }
         }
         return view
