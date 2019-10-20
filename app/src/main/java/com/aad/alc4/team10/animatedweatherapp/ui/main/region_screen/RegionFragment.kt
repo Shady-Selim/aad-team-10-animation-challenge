@@ -30,7 +30,7 @@ class RegionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getRegions(true)
+        viewModel.getRegions(activity!!.checkConnectivity())
         drawRegionRecycler(savedInstanceState)
     }
 
