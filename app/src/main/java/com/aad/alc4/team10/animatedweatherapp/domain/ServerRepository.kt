@@ -1,11 +1,8 @@
 package com.aad.alc4.team10.animatedweatherapp.domain
 
-import Region
+import com.aad.alc4.team10.animatedweatherapp.model.Region
 import androidx.lifecycle.MutableLiveData
 import com.aad.alc4.team10.animatedweatherapp.ui.ForecastsResponse
-import com.aad.alc4.team10.animatedweatherapp.ui.domain.ServerApi
-import com.aad.alc4.team10.animatedweatherapp.ui.domain.regionApi
-import com.aad.alc4.team10.animatedweatherapp.ui.domain.retrofitApi
 import com.weather.useecasses.engine.getData
 import retrofit2.Call
 

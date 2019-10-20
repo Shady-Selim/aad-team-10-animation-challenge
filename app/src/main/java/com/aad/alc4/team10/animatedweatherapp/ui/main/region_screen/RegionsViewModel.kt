@@ -1,6 +1,6 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen
 
-import Region
+import com.aad.alc4.team10.animatedweatherapp.model.Region
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager

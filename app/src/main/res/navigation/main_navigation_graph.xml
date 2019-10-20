@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_countryFragment_to_cityFragment"
             app:destination="@id/cityFragment" />
+        <argument
+            android:name="exportedRegion"
+            app:argType="com.aad.alc4.team10.animatedweatherapp.model.Region" />
     </fragment>
     <fragment
         android:id="@+id/cityFragment"
