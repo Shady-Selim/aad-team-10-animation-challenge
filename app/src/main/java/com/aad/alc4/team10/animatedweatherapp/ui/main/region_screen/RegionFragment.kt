@@ -15,7 +15,7 @@ import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.fragment_region_list.*
 
-const val EXPORTED_REGION =
+public val EXPORTED_REGION =
     "com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.exported.region"
 
 class RegionFragment : Fragment() {
@@ -32,11 +32,14 @@ class RegionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getRegions(activity!!.checkConnectivity())
-        drawRegionRecycler(savedInstanceState)
+        val bundle = Bundle()
+        if (savedInstanceState == null) drawRegionRecycler(bundle)
+        else drawRegionRecycler(savedInstanceState)
+
     }
 
     private fun drawRegionRecycler(bundle: Bundle?) = with(regions_recycler_view) {
-        layoutManager = GridLayoutManager(context,2)
+        layoutManager = GridLayoutManager(context, 2)
         adapter = MyRegionRecyclerViewAdapter(
             this@RegionFragment,
             viewModel.regionsLiveData
