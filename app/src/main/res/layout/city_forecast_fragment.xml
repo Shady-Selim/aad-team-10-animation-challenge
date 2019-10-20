@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.forecast_Screen.CityForecast">
 
+    <ImageView
+        android:id="@+id/img_error"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/error_icon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rv_city_forecasts_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_city_forecasts_list"
         android:layout_width="0dp"
@@ -26,7 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
