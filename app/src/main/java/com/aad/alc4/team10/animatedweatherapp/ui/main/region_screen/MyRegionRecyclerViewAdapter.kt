@@ -1,6 +1,6 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen
 
-import Region
+import com.aad.alc4.team10.animatedweatherapp.model.Region
 import android.graphics.Bitmap
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

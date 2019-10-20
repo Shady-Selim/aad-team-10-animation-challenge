@@ -1,6 +1,6 @@
-package com.aad.alc4.team10.animatedweatherapp.ui.domain
+package com.aad.alc4.team10.animatedweatherapp.domain
 
-import Region
+import com.aad.alc4.team10.animatedweatherapp.model.Region
 import com.aad.alc4.team10.animatedweatherapp.BuildConfig.API_KEY
 import com.aad.alc4.team10.animatedweatherapp.ui.ForecastsResponse
 import retrofit2.Call
