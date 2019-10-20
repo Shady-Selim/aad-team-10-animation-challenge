@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.aad.alc4.team10.animatedweatherapp.R
 
 import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
@@ -35,7 +36,7 @@ class RegionFragment : Fragment() {
     }
 
     private fun drawRegionRecycler(bundle: Bundle?) = with(regions_recycler_view) {
-        layoutManager = LinearLayoutManager(context)
+        layoutManager = GridLayoutManager(context,2)
         adapter = MyRegionRecyclerViewAdapter(
             this@RegionFragment,
             viewModel.regionsLiveData
