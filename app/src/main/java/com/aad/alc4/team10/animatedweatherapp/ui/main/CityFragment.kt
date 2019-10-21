@@ -24,12 +24,14 @@ class CityFragment : Fragment() {
     private var cities = arrayListOf<City?>()
 
 
+    lateinit var country :Country
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
-            val country = it.getParcelable<Country>(ARG_CITIES)
+            country = it.getParcelable<Country>(ARG_CITIES)
             cities.clear()
             cities.addAll(country?.cities!!)
         }
@@ -41,6 +43,8 @@ class CityFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_city_list, container, false)
+
+        activity?.title = country.name
 
         // Set the adapter
         if (view is RecyclerView) {
