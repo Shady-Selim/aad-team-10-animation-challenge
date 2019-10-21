@@ -20,7 +20,6 @@ import com.aad.alc4.team10.animatedweatherapp.model.Region
  */
 class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicked {
 
-    // TODO: Customize parameters
     private var columnCount = 1
 
     lateinit var region: Region
