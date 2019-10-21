@@ -16,14 +16,9 @@ import com.aad.alc4.team10.animatedweatherapp.model.Country
 import com.aad.alc4.team10.animatedweatherapp.model.Region
 import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.RegionFragmentDirections
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [CountryFragment.OnListFragmentInteractionListener] interface.
- */
 class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicked {
 
-    private var columnCount = 1
+    private var columnCount = 2
 
     lateinit var region: Region
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,7 +55,7 @@ class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicke
     }
 
     override fun onClick(position: Int) {
-
+        startCountriesScreen(region.countries!!.get(position))
     }
 
     private fun startCountriesScreen(country: Country) = CountryFragmentDirections
