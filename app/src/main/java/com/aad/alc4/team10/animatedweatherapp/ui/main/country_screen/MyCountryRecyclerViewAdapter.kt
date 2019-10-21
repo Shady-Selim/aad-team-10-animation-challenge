@@ -4,61 +4,69 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.graphics.drawable.toBitmap
 import com.aad.alc4.team10.animatedweatherapp.R
+import com.aad.alc4.team10.animatedweatherapp.model.Country
 
 
-import com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen.CountryFragment.OnListFragmentInteractionListener
-import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
+import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.createPaletteSync
 
-import kotlinx.android.synthetic.main.fragment_country.view.*
-
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
 class MyCountryRecyclerViewAdapter(
-    private val mValues: List<DummyItem>,
-    private val mListener: OnListFragmentInteractionListener?
-) : RecyclerView.Adapter<MyCountryRecyclerViewAdapter.ViewHolder>() {
+    private val mValues: List<Country>,
+    private val onclick: OnCountryClicked
+) : RecyclerView.Adapter<MyCountryRecyclerViewAdapter.CountryViewHolder>() {
 
-    private val mOnClickListener: View.OnClickListener
-
-    init {
-        mOnClickListener = View.OnClickListener { v ->
-            val item = v.tag as DummyItem
-            // Notify the active callbacks interface (the activity, if the fragment is attached to
-            // one) that an item has been selected.
-            mListener?.onListFragmentInteraction(item)
-        }
+    interface OnCountryClicked {
+        fun onClick(position: Int)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.fragment_country, parent, false)
-        return ViewHolder(view)
+        return CountryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mIdView.text = item.id
-        holder.mContentView.text = item.content
+
 
         with(holder.mView) {
             tag = item
-            setOnClickListener(mOnClickListener)
+            setOnClickListener { onclick.onClick(position) }
         }
     }
 
     override fun getItemCount(): Int = mValues.size
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+    inner class CountryViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+        private val photo by lazy { mView.findViewById<ImageView>(R.id.country_photo_image_view) }
+        private val nameTextView by lazy { mView.findViewById<TextView>(R.id.country_name_text_view) }
 
-        override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+        private val card by lazy { mView.findViewById<CardView>(R.id.item_country_card_view) }
+
+        fun bind(co: Country) = co
+            .also { photo.setImageResource(setCountryPhoto(it)) }
+            .apply { nameTextView.text = name }
+            .let { createPaletteSync(mView.context.resources.getDrawable(setCountryPhoto(it)).toBitmap()) }
+            .run { card.setCardBackgroundColor(getDominantColor(mView.resources.getColor(R.color.off_white))) }
+
+        private fun setCountryPhoto(region: Country): Int = when (region.name) {
+            "ARE" -> R.drawable.are
+            "CHN" -> R.drawable.chn
+            "DEU" -> R.drawable.deu
+            "EGY" -> R.drawable.egy
+            "FIN" -> R.drawable.fin
+            "GBR" -> R.drawable.gbr
+            "IND" -> R.drawable.ind
+            "NGA" -> R.drawable.nga
+            "PAK" -> R.drawable.pak
+            "RWA" -> R.drawable.rwa
+            "SAF" -> R.drawable.saf
+            "SAU" -> R.drawable.sau
+            else -> R.drawable.earth
         }
     }
 }
