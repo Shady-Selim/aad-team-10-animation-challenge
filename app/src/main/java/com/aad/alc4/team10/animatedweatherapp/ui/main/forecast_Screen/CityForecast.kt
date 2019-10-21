@@ -13,11 +13,15 @@ import androidx.lifecycle.ViewModelProviders
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.core.showAnimator
 import com.aad.alc4.team10.animatedweatherapp.ui.Forecast
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.city_forecast_fragment.*
+import kotlinx.android.synthetic.main.city_forecast_fragment.view.*
 
-class CityForecast : Fragment() {
+const val CAIRO_ID = "360630"
 
+class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandler {
     companion object {
+
         fun newInstance() =
             CityForecast()
     }
@@ -36,18 +40,19 @@ class CityForecast : Fragment() {
         )
     }
     private val errorObjectAnimator by lazy { img_error.showAnimator() }
-    private lateinit var viewModel: CityForecastViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.city_forecast_fragment, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.city_forecast_fragment, container, false)
+        .apply {
+            activity?.actionBar?.hide()
+            rv_city_forecasts_list.adapter = forecastAdapter
+
+        }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CityForecastViewModel::class.java)
 
         initViewModel()
 
@@ -57,12 +62,7 @@ class CityForecast : Fragment() {
     private fun initViewModel() = viewModel.run {
         loading.observe(this@CityForecast, Observer { onLoading(it) })
         loadForecast(CAIRO_ID, ::onError)
-        //loadForecast("2172797")
-    }
 
-    private fun showForecasts(forecasts: List<Forecast>) {
-
-        tv_response.text = if (forecasts.isNullOrEmpty()) "" else forecasts.toString()
     }
 
     private fun onLoading(loading: Boolean) {
@@ -126,4 +126,5 @@ class CityForecast : Fragment() {
     }
 
     override fun onClick(forecast: Forecast) {}
+
 }
