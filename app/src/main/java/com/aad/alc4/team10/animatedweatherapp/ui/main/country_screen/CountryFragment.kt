@@ -1,4 +1,4 @@
-package com.aad.alc4.team10.animatedweatherapp.ui.main
+package com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen
 
 import android.content.Context
 import android.os.Bundle
@@ -6,31 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
-import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent
-import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
+import com.aad.alc4.team10.animatedweatherapp.model.Country
+import com.aad.alc4.team10.animatedweatherapp.model.Region
+import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.RegionFragmentDirections
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [CountryFragment.OnListFragmentInteractionListener] interface.
- */
-class CountryFragment : Fragment() {
+class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicked {
 
-    // TODO: Customize parameters
-    private var columnCount = 1
+    private var columnCount = 2
 
-    private var listener: OnListFragmentInteractionListener? = null
-
+    lateinit var region: Region
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
+        region = arguments?.getParcelable<Region>("exportedRegion")!!
 
     }
 
@@ -40,6 +34,8 @@ class CountryFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_country_list, container, false)
 
+        activity?.title = region.name
+
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
@@ -47,41 +43,33 @@ class CountryFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyCountryRecyclerViewAdapter(DummyContent.ITEMS, listener)
+                adapter =
+                    MyCountryRecyclerViewAdapter(
+                        region.countries!!,
+                        this@CountryFragment
+                    )
             }
         }
         return view
     }
 
+    override fun onClick(position: Int) {
+        startCountriesScreen(region.countries!!.get(position))
+    }
+
+    private fun startCountriesScreen(country: Country) = CountryFragmentDirections
+        .actionCountryFragmentToCityFragment(country)
+        .let { activity?.findNavController(R.id.nav_host_fragment)?.navigate(it) }
+
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException("$context  must implement OnListFragmentInteractionListener")
-        }
     }
 
     override fun onDetach() {
         super.onDetach()
-        listener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson
-     * [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html)
-     * for more information.
-     */
-    interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onListFragmentInteraction(item: DummyItem?)
-    }
 
     companion object {
 

@@ -11,7 +11,7 @@ import com.aad.alc4.team10.animatedweatherapp.model.City
 import kotlinx.android.synthetic.main.fragment_city.view.*
 
 class MyCityRecyclerViewAdapter(
-    private val mCities: List<City>?,
+    private val mCities: ArrayList<City?>,
     private val onClick: (City) -> Unit ?
 ) : RecyclerView.Adapter<MyCityRecyclerViewAdapter.ViewHolder>() {
 
