@@ -5,6 +5,7 @@
     <style name="AppTheme.Main">
         <item name="android:windowSharedElementsUseOverlay">false</item>
         <item name="android:windowContentTransitions">true</item>
+
         <item name="android:windowExitTransition">@transition/activity_main_exit</item>
         <item name="android:windowReenterTransition">@transition/activity_main_reenter</item>
     </style>

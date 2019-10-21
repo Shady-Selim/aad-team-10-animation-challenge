@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item_country_card_view"
@@ -23,6 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="120dp"
             android:scaleType="fitXY"
+            android:transitionName="country_photo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +36,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:gravity="center|center_vertical"
+            android:transitionName="country_name"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"

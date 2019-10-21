@@ -1,13 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/regions_recycler_view"
-    android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CityFragment"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.main.CityFragment"
-    tools:listitem="@layout/fragment_city" />
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_country_photo"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
+        android:transitionName="country_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/earth" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cities_recycler_view"
+        android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CityFragment"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_country_photo"
+        tools:context=".ui.main.CityFragment"
+        tools:listitem="@layout/fragment_city" />
+
+    <TextView
+        android:id="@+id/txt_country_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center|center_vertical"
+
+        android:textAlignment="textStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/white"
+        android:transitionName="country_name"
+        app:layout_constraintBottom_toBottomOf="@+id/img_country_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Country" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
 import com.aad.alc4.team10.animatedweatherapp.model.Country
+import com.aad.alc4.team10.animatedweatherapp.model.getCountryPhotoRec
+import kotlinx.android.synthetic.main.fragment_city_list.view.*
 
 /**
  * A fragment representing a list of Items.
@@ -23,17 +25,20 @@ class CityFragment : Fragment() {
 
     private var cities = arrayListOf<City?>()
 
-
-    lateinit var country :Country
+    lateinit var country: Country
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.slide_right)
+                .apply {
+                    duration = 700
+                }
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
             country = it.getParcelable<Country>(ARG_CITIES)
             cities.clear()
-            cities.addAll(country?.cities!!)
+            cities.addAll(country.cities!!)
         }
 
     }
@@ -41,25 +46,24 @@ class CityFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_city_list, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_city_list, container, false).apply {
 
-        activity?.title = country.name
-
+        //activity?.title = country.name
+        activity?.actionBar?.hide()
+        img_country_photo.setImageResource(country.getCountryPhotoRec())
+        txt_country_name.text = country.name
         // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = LinearLayoutManager(context)
-                adapter = MyCityRecyclerViewAdapter(cities) {
-                    findNavController().navigate(
-                        CityFragmentDirections.actionCityFragmentToCityForecast(
-                            it
-                        )
+        with(cities_recycler_view) {
+            layoutManager = LinearLayoutManager(context)
+            adapter = MyCityRecyclerViewAdapter(cities) {
+                findNavController().navigate(
+                    CityFragmentDirections.actionCityFragmentToCityForecast(
+                        it
                     )
-                }
+                )
             }
         }
-        return view
+
     }
 
     companion object {

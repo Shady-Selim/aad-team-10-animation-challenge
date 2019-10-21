@@ -1,17 +1,15 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen
 
-import com.aad.alc4.team10.animatedweatherapp.model.Region
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aad.alc4.team10.animatedweatherapp.R
-
+import com.aad.alc4.team10.animatedweatherapp.model.Region
 import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.fragment_region_list.*
 

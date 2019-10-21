@@ -24,7 +24,11 @@
         tools:layout="@layout/fragment_country_list" >
         <action
             android:id="@+id/action_countryFragment_to_cityFragment"
-            app:destination="@id/cityFragment" />
+            app:destination="@id/cityFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
             android:name="exportedRegion"
             app:argType="com.aad.alc4.team10.animatedweatherapp.model.Region" />
