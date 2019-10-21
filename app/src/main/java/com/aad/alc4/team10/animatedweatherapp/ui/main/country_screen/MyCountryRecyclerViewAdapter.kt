@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.Country
@@ -46,30 +47,27 @@ class MyCountryRecyclerViewAdapter(
             .apply { nameTextView.text = name }
             .let { createPaletteSync(itemView.context.resources.getDrawable(it.getCountryPhotoRec()).toBitmap()) }
             .run { card.setCardBackgroundColor(getDominantColor(itemView.resources.getColor(R.color.off_white))) }
-            .run {
-                val photoTransitionName = "country_photo-${co.short}"
-                val nameTransitionName = "country_name-${co.short}"
-                ViewCompat.setTransitionName(photo, photoTransitionName)
-                ViewCompat.setTransitionName(nameTextView, nameTransitionName)
+            .run { handleOnClick(co) }
 
+        private fun handleOnClick(co: Country) {
+            val photoTransitionName = "country_photo-${co.short}"
+            val nameTransitionName = "country_name-${co.short}"
 
-                with(itemView) {
-                    setOnClickListener {
+            ViewCompat.setTransitionName(photo, photoTransitionName)
+            ViewCompat.setTransitionName(nameTextView, nameTransitionName)
 
-                        val action =
-                            CountryFragmentDirections.actionCountryFragmentToCityFragment(co)
-                        val extras = androidx.navigation.fragment.FragmentNavigatorExtras(
-                            photo to photoTransitionName,
-                            nameTextView to nameTransitionName
-                        )
-                        it.findNavController()
-                            .navigate(action.actionId, action.arguments, null, extras)
+            itemView.setOnClickListener {
+                val action =
+                    CountryFragmentDirections.actionCountryFragmentToCityFragment(co)
+                val extras = FragmentNavigatorExtras(
+                    photo to photoTransitionName,
+                    nameTextView to nameTransitionName
+                )
+                it.findNavController()
+                    .navigate(action.actionId, action.arguments, null, extras)
 
-                        //onclick.onClick(position, country_photo_image_view, country_name_text_view)
-
-
-                    }
-                }
             }
+        }
     }
+
 }

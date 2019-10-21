@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/img_country_photo"
         android:layout_width="0dp"
-        android:layout_height="400dp"
+        android:layout_height="240dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -21,10 +21,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cities_recycler_view"
         android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CityFragment"
-
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:background="#FFFFFF"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,19 +33,36 @@
         tools:context=".ui.main.CityFragment"
         tools:listitem="@layout/fragment_city" />
 
-    <TextView
-        android:id="@+id/txt_country_name"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/crd_country"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center|center_vertical"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="8dp"
 
-        android:textAlignment="textStart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/img_country_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Country" />
+        app:layout_constraintTop_toBottomOf="@+id/img_country_photo">
+
+        <TextView
+            android:id="@+id/txt_country_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="#00F7F0F0"
+            android:fontFamily="serif"
+            android:gravity="center|center_vertical"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="#F8F7FA"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            tools:text="Country" />
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
 import com.aad.alc4.team10.animatedweatherapp.model.Country
 import com.aad.alc4.team10.animatedweatherapp.model.getCountryPhotoRec
+import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.createPaletteSync
 import kotlinx.android.synthetic.main.fragment_city_list.view.*
 
 /**
@@ -38,9 +40,9 @@ class CityFragment : Fragment() {
         }
 
         sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.slide_top)
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
                 .apply {
-                    duration = 700
+                    duration = 500
                 }
 
     }
@@ -68,6 +70,12 @@ class CityFragment : Fragment() {
                 )
             }
         }
+        country
+            .getCountryPhotoRec()
+            .let(resources::getDrawable).toBitmap()
+            .let(::createPaletteSync)
+            .getDominantColor(resources.getColor(R.color.off_white))
+            .run(crd_country::setCardBackgroundColor)
 
     }
 

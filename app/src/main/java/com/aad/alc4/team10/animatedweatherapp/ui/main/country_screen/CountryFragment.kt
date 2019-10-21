@@ -21,10 +21,10 @@ class CountryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.slide_bottom)
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
                 .apply {
-                duration = 700
-            }
+                    duration = 700
+                }
 
         region = arguments?.getParcelable<Region>("exportedRegion")!!
 
@@ -45,6 +45,7 @@ class CountryFragment : Fragment() {
             }
             adapter = MyCountryRecyclerViewAdapter(region.countries!!)
         }
+
     }
 
 
