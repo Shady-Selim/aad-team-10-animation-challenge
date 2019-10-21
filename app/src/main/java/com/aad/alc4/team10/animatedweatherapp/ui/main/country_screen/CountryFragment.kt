@@ -21,7 +21,8 @@ class CountryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move).apply {
+            TransitionInflater.from(context).inflateTransition(android.R.transition.slide_bottom)
+                .apply {
                 duration = 700
             }
 

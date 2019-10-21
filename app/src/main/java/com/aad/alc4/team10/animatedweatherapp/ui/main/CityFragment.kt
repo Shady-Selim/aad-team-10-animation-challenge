@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,11 +30,6 @@ class CityFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.slide_right)
-                .apply {
-                    duration = 700
-                }
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
             country = it.getParcelable<Country>(ARG_CITIES)
@@ -41,13 +37,22 @@ class CityFragment : Fragment() {
             cities.addAll(country.cities!!)
         }
 
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.slide_top)
+                .apply {
+                    duration = 700
+                }
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_city_list, container, false).apply {
-
+        val photoTransitionName = "country_photo-${country.short}"
+        val nameTransitionName = "country_name-${country.short}"
+        ViewCompat.setTransitionName(img_country_photo, photoTransitionName)
+        ViewCompat.setTransitionName(txt_country_name, nameTransitionName)
         //activity?.title = country.name
         activity?.actionBar?.hide()
         img_country_photo.setImageResource(country.getCountryPhotoRec())

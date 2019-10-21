@@ -10,9 +10,8 @@
     <ImageView
         android:id="@+id/img_country_photo"
         android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_height="400dp"
         android:scaleType="fitXY"
-        android:transitionName="country_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +44,6 @@
         android:textAlignment="textStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@android:color/white"
-        android:transitionName="country_name"
         app:layout_constraintBottom_toBottomOf="@+id/img_country_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
