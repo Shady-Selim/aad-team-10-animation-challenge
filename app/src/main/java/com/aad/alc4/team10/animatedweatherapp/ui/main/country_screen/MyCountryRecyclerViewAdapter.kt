@@ -1,5 +1,6 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen
 
+import android.system.Os.bind
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -34,9 +35,9 @@ class MyCountryRecyclerViewAdapter(
 
 
         with(holder.mView) {
-            tag = item
             setOnClickListener { onclick.onClick(position) }
         }
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int = mValues.size
@@ -53,19 +54,19 @@ class MyCountryRecyclerViewAdapter(
             .let { createPaletteSync(mView.context.resources.getDrawable(setCountryPhoto(it)).toBitmap()) }
             .run { card.setCardBackgroundColor(getDominantColor(mView.resources.getColor(R.color.off_white))) }
 
-        private fun setCountryPhoto(region: Country): Int = when (region.name) {
-            "ARE" -> R.drawable.are
-            "CHN" -> R.drawable.chn
-            "DEU" -> R.drawable.deu
-            "EGY" -> R.drawable.egy
-            "FIN" -> R.drawable.fin
-            "GBR" -> R.drawable.gbr
-            "IND" -> R.drawable.ind
-            "NGA" -> R.drawable.nga
-            "PAK" -> R.drawable.pak
-            "RWA" -> R.drawable.rwa
-            "SAF" -> R.drawable.saf
-            "SAU" -> R.drawable.sau
+        private fun setCountryPhoto(country: Country): Int = when (country.short) {
+            "are" -> R.drawable.are
+            "chn" -> R.drawable.chn
+            "deu" -> R.drawable.deu
+            "egy" -> R.drawable.egy
+            "fin" -> R.drawable.fin
+            "gbr" -> R.drawable.gbr
+            "ind" -> R.drawable.ind
+            "nga" -> R.drawable.nga
+            "pak" -> R.drawable.pak
+            "rwa" -> R.drawable.rwa
+            "saf" -> R.drawable.saf
+            "sau" -> R.drawable.sau
             else -> R.drawable.earth
         }
     }

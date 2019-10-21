@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
+import com.aad.alc4.team10.animatedweatherapp.model.Country
 import com.aad.alc4.team10.animatedweatherapp.model.Region
+import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.RegionFragmentDirections
 
 /**
  * A fragment representing a list of Items.
@@ -57,10 +60,13 @@ class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicke
     }
 
     override fun onClick(position: Int) {
-        val bundle = Bundle()
-        bundle.putParcelable("exportedCountry", region.countries?.get(position))
-        findNavController().navigate(R.id.action_countryFragment_to_cityFragment, bundle)
+
     }
+
+    private fun startCountriesScreen(country: Country) = CountryFragmentDirections
+        .actionCountryFragmentToCityFragment(country)
+        .let { activity?.findNavController(R.id.nav_host_fragment)?.navigate(it) }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

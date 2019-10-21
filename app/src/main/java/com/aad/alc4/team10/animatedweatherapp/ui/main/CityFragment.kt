@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
+import com.aad.alc4.team10.animatedweatherapp.model.Country
 
 /**
  * A fragment representing a list of Items.
@@ -20,7 +21,7 @@ class CityFragment : Fragment() {
 
     private var columnCount = 1
 
-    private var cities: ArrayList<City>? = arrayListOf()
+    private var cities = arrayListOf<City?>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +29,9 @@ class CityFragment : Fragment() {
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
-            cities = it.getParcelableArrayList(ARG_CITIES)
+            val country = it.getParcelable<Country>(ARG_CITIES)
+            cities.clear()
+            cities.addAll(country?.cities!!)
         }
 
     }
@@ -42,8 +45,14 @@ class CityFragment : Fragment() {
         // Set the adapter
         if (view is RecyclerView) {
             with(view) {
-                layoutManager =  LinearLayoutManager(context)
-                adapter = MyCityRecyclerViewAdapter(cities){findNavController().navigate(CityFragmentDirections.actionCityFragmentToCityForecast(it))}
+                layoutManager = LinearLayoutManager(context)
+                adapter = MyCityRecyclerViewAdapter(cities) {
+                    findNavController().navigate(
+                        CityFragmentDirections.actionCityFragmentToCityForecast(
+                            it
+                        )
+                    )
+                }
             }
         }
         return view
@@ -52,7 +61,7 @@ class CityFragment : Fragment() {
     companion object {
 
         const val ARG_COLUMN_COUNT = "column-count"
-        const val ARG_CITIES = "cities"
+        const val ARG_CITIES = "exportedcountry"
 
         @JvmStatic
         fun newInstance(columnCount: Int) =

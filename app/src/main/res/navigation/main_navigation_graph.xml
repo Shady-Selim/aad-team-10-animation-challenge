@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_cityFragment_to_cityForecast"
             app:destination="@id/cityForecast" />
+        <argument
+            android:name="exportedcountry"
+            app:argType="com.aad.alc4.team10.animatedweatherapp.model.Country" />
     </fragment>
     <fragment
         android:id="@+id/cityForecast"
