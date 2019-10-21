@@ -24,9 +24,6 @@ class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicke
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
         region = arguments?.getParcelable<Region>("exportedRegion")!!
 
     }
