@@ -91,16 +91,27 @@ class CityForecastAdapter(
                 val countryName = cityLiveData.value!!.country
 
                 holder.cityName.text = "$cityName , $countryName"
+
+                Glide.with(mContext).load(weatherImageId)
+                    .into(holder.iconView)
             }
 
-            VIEW_TYPE_FUTURE_DAY -> weatherImageId = ForecastUtils
-                .getSmallArtResourceIdForWeatherIcon(weather.icon!!)
+            VIEW_TYPE_FUTURE_DAY -> {
+                when(weather.icon){
+                    "01d" -> Glide.with(mContext).load(mContext.resources.getDrawable(R.drawable.ic_clear))
+                        .into(holder.iconView)
+                    "01n" -> Glide.with(mContext).load(mContext.resources.getDrawable(R.drawable.ic_noun_clear_night))
+                        .into(holder.iconView)
+                    else -> Glide.with(mContext).load("https://www.openweathermap.org/img/wn/"+weather.icon+"@2x.png")
+                        .into(holder.iconView)
+                }
+//                weatherImageId = ForecastUtils
+//                    .getSmallArtResourceIdForWeatherIcon(weather.icon!!)
+
+            }
 
             else -> throw IllegalArgumentException("Invalid view type, value of $viewType")
         }
-
-        Glide.with(mContext).load(weatherImageId)
-            .into(holder.iconView)
 
         val weekday = checkIfToday(date!!)
 
