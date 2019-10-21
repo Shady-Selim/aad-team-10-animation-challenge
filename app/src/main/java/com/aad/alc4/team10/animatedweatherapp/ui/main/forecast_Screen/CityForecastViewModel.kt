@@ -8,13 +8,14 @@ import com.aad.alc4.team10.animatedweatherapp.domain.ServerRepository
 import com.aad.alc4.team10.animatedweatherapp.ui.City
 import com.aad.alc4.team10.animatedweatherapp.ui.Forecast
 import com.weather.useecasses.engine.toMutableLiveData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 
 
 class CityForecastViewModel(
     private val _loading: MutableLiveData<Boolean> = false.toMutableLiveData(),
-    private val _error: MutableLiveData<Boolean> = false.toMutableLiveData(),
     private val _forecasts: MutableLiveData<List<Forecast>> = listOf<Forecast>().toMutableLiveData(),
     private val _city: MutableLiveData<City> = MutableLiveData(),
     private val ropository: ServerRepository = ServerRepository.instance
@@ -24,15 +25,15 @@ class CityForecastViewModel(
         get() = _loading
     val forecasts: LiveData<List<Forecast>>
         get() = _forecasts
-    val error: LiveData<Boolean>
-        get() = _error
+    val city: LiveData<City>
+        get() = _city
 
-    fun loadForecast(cityId: String) =
+    fun loadForecast(cityId: String, onError: (Boolean) -> Unit) {
         viewModelScope.launch {
             if (loading.value == false) {
+                withContext(Dispatchers.Main) { onError(false) }
                 _loading.postValue(true)
                 try {
-                    _error.postValue(false)
                     withTimeout(5000) {
                         val response = ropository.getForecasts(cityId)
                         response.apply {
@@ -41,9 +42,9 @@ class CityForecastViewModel(
                         }
 
                     }
-                } catch (e: Exception) {
-                    _error.postValue(true)
+                } catch (e: Throwable) {
                     //handle error
+                    withContext(Dispatchers.Main) { onError(true) }
                 } finally {
                     _loading.postValue(false)
                 }
@@ -53,4 +54,6 @@ class CityForecastViewModel(
 
         }
 
+    }
 }
+
