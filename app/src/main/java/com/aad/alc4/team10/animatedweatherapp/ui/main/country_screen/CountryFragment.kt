@@ -18,7 +18,7 @@ import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.RegionFragme
 
 class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicked {
 
-    private var columnCount = 2
+    private var columnCount = 3
 
     lateinit var region: Region
     override fun onCreate(savedInstanceState: Bundle?) {
