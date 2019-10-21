@@ -4,8 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -121,6 +123,19 @@ class CityForecastAdapter(
         holder.lowTempView.text = lowString
 
         holder.dateTime.text = dateText
+
+        // bind data here
+
+        // we apply animation to views here
+        // first lets create an animation for user photo
+        holder.iconView.animation = AnimationUtils.loadAnimation(mContext,R.anim.fade_transition_animation)
+
+        // lets create the animation for the whole card
+        // first lets create a reference to it
+        // you ca use the previous same animation like the following
+
+        // but i want to use a different one so lets create it ..
+        holder.container?.animation = AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation)
     }
 
     override fun getItemCount(): Int {
@@ -149,6 +164,7 @@ class CityForecastAdapter(
         val lowTempView: TextView
         val cityName: TextView
         val dateTime: TextView
+        var container : ConstraintLayout? = null
 
         init {
 
@@ -159,7 +175,7 @@ class CityForecastAdapter(
             lowTempView = view.findViewById<View>(R.id.tv_low_temperature) as TextView
             cityName = view.findViewById<View>(R.id.tv_city_name) as TextView
             dateTime = view.findViewById<View>(R.id.tv_date_time_id) as TextView
-
+            container = view.findViewById<View>(R.id.container) as? ConstraintLayout
             view.setOnClickListener(this)
         }
 
