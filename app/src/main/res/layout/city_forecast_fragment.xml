@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.CityForecast">
 
+    <ImageView
+        android:id="@+id/img_error"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/error_icon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/rv_city_forecasts_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
     <androidx.recyclerview.widget.RecyclerView
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,15 +59,4 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_try_again"
         app:layout_constraintEnd_toEndOf="@+id/btn_try_again"
         app:layout_constraintStart_toStartOf="@+id/btn_try_again" />
-
-    <Button
-        android:id="@+id/btn_try_again"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/try_again"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
