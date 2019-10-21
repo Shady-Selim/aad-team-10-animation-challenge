@@ -1,6 +1,7 @@
+package com.aad.alc4.team10.animatedweatherapp.model
+
 import android.os.Parcel
 import android.os.Parcelable
-import com.aad.alc4.team10.animatedweatherapp.model.Country
 import com.squareup.moshi.Json
 
 data class Region(
