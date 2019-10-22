@@ -1,18 +1,17 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.City
-
 import kotlinx.android.synthetic.main.fragment_city.view.*
 
 class MyCityRecyclerViewAdapter(
     private val mCities: ArrayList<City?>,
-    private val onClick: (City) -> Unit ?
+    private val onClick: (City, View, TextView) -> Unit ?
 ) : RecyclerView.Adapter<MyCityRecyclerViewAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
@@ -22,33 +21,30 @@ class MyCityRecyclerViewAdapter(
             val city = v.tag as City
             // Notify the active callbacks interface (the activity, if the fragment is attached to
             // one) that an item has been selected.
-            onClick(city)
+            onClick(city, v, v.tv_city_name)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_city, parent, false)
-        return ViewHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        LayoutInflater.from(parent.context).inflate(
+            R.layout.fragment_city,
+            parent,
+            false
+        )
+    )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val city = mCities?.get(position)
-        holder.mTvCityName.text = city?.name ?: " "
-
-        with(holder.mView) {
-            tag = city
-            setOnClickListener(mOnClickListener)
-        }
+        mCities[position]?.let { holder.bindTo(it, mOnClickListener) }
     }
 
-    override fun getItemCount(): Int = mCities?.size ?: 0
+    override fun getItemCount(): Int = mCities.size
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mTvCityName: TextView = mView.tv_city_name
+    inner class ViewHolder(private val mView: View) : RecyclerView.ViewHolder(mView) {
 
-        override fun toString(): String {
-            return super.toString() + " '" + mTvCityName.text + "'"
+        fun bindTo(city: City, mOnClickListener: View.OnClickListener) {
+            mView.tv_city_name.text = city.name ?: " "
+            mView.tag = city
+            mView.setOnClickListener(mOnClickListener)
         }
     }
 }

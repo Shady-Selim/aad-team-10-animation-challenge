@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
@@ -66,12 +67,14 @@ class CityFragment : Fragment() {
         // Set the adapter
         with(cities_recycler_view) {
             layoutManager = LinearLayoutManager(context)
-            adapter = MyCityRecyclerViewAdapter(cities) {
-                findNavController().navigate(
-                    CityFragmentDirections.actionCityFragmentToCityForecast(
-                        it
-                    )
+            adapter = MyCityRecyclerViewAdapter(cities) { city, _, cityTextView ->
+                ViewCompat.setTransitionName(cityTextView, getString(R.string.transition_city_name))
+                val action = CityFragmentDirections.actionCityFragmentToCityForecast(city)
+
+                val extras = FragmentNavigatorExtras(
+                    cityTextView to getString(R.string.transition_city_name)
                 )
+                findNavController().navigate(action.actionId, action.arguments, null, extras)
             }
         }
         country
