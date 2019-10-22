@@ -4,5 +4,5 @@
     <dimen name="cardview_city_margin">16dp</dimen>
     <dimen name="cardview_city_text_size">20sp</dimen>
     <dimen name="forecast_text_size">28dp</dimen>
-    <dimen name="list_icon">40dp</dimen>
+    <dimen name="list_icon">60dp</dimen>
 </resources>
