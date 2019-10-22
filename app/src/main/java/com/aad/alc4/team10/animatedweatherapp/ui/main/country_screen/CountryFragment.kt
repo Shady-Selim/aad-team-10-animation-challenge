@@ -1,28 +1,35 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main.country_screen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 import com.aad.alc4.team10.animatedweatherapp.R
-import com.aad.alc4.team10.animatedweatherapp.model.Country
 import com.aad.alc4.team10.animatedweatherapp.model.Region
-import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.RegionFragmentDirections
+import com.aad.alc4.team10.animatedweatherapp.model.getRegionPhoto
+import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.createPaletteSync
+import kotlinx.android.synthetic.main.fragment_country_list.view.*
 
-class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicked {
+class CountryFragment : Fragment() {
+
 
     private var columnCount = 2
 
     lateinit var region: Region
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+                .apply {
+                    duration = 700
+                }
 
         region = arguments?.getParcelable<Region>("exportedRegion")!!
 
@@ -31,43 +38,29 @@ class CountryFragment : Fragment(), MyCountryRecyclerViewAdapter.OnCountryClicke
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_country_list, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_country_list, container, false).apply {
+        (activity as AppCompatActivity).supportActionBar?.show()
 
-        activity?.title = region.name
+        ViewCompat.setTransitionName(img_region_photo, "region_photo${region.name}")
+        img_region_photo.setImageResource(region.getRegionPhoto())
+        region
+            .also { activity?.title = it.name }
+            .getRegionPhoto()
+            .let(resources::getDrawable).toBitmap()
+            .let(::createPaletteSync)
+            .getDominantColor(resources.getColor(R.color.off_white))
+            .run(::setBackgroundColor)
+
 
         // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter =
-                    MyCountryRecyclerViewAdapter(
-                        region.countries!!,
-                        this@CountryFragment
-                    )
+        with(regions_recycler_view) {
+            layoutManager = when {
+                columnCount <= 1 -> LinearLayoutManager(context)
+                else -> GridLayoutManager(context, columnCount)
             }
+            adapter = MyCountryRecyclerViewAdapter(region.countries!!)
         }
-        return view
-    }
 
-    override fun onClick(position: Int) {
-        startCountriesScreen(region.countries!!.get(position))
-    }
-
-    private fun startCountriesScreen(country: Country) = CountryFragmentDirections
-        .actionCountryFragmentToCityFragment(country)
-        .let { activity?.findNavController(R.id.nav_host_fragment)?.navigate(it) }
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
     }
 
 
