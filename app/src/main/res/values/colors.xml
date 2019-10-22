@@ -13,4 +13,5 @@
     <color name="forecast_item_today_background_color">#3F51B5</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#757575</color>
+  <color name="city_color">#495596</color>
 </resources>

@@ -4,7 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    app:layoutManager="LinearLayoutManager"
+    tools:context=".ui.main.CityFragment"
+    tools:listitem="@layout/fragment_city" />
 
     <ImageView
         android:id="@+id/img_country_photo"
