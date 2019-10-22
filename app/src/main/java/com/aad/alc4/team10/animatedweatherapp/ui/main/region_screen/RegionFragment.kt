@@ -4,18 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.transition.TransitionInflater
 import com.aad.alc4.team10.animatedweatherapp.R
-import com.aad.alc4.team10.animatedweatherapp.model.Region
 import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
 import kotlinx.android.synthetic.main.fragment_region_list.*
 
 class RegionFragment : Fragment() {
     private val viewModel by lazy {
         ViewModelProviders.of(this)[RegionsViewModel::class.java]
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+                .apply { duration = 700 }
     }
 
     override fun onCreateView(
@@ -25,9 +32,8 @@ class RegionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (activity as AppCompatActivity).supportActionBar?.show()
         activity?.title = "Regions"
-
 
         viewModel.getRegions(activity!!.checkConnectivity())
         drawRegionRecycler()
@@ -38,12 +44,9 @@ class RegionFragment : Fragment() {
         adapter = MyRegionRecyclerViewAdapter(
             this@RegionFragment,
             viewModel.regionsLiveData
-        ) { startCountriesScreen(it) }
+        )
     }
 
-    private fun startCountriesScreen(region: Region) = RegionFragmentDirections
-        .actionRegionFragmentToCountryFragment(region)
-        .let { activity?.findNavController(R.id.nav_host_fragment)?.navigate(it) }
 
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name

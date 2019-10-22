@@ -4,12 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.TransitionInflater
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.model.Region
+import com.aad.alc4.team10.animatedweatherapp.model.getRegionPhoto
+import com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen.createPaletteSync
 import kotlinx.android.synthetic.main.fragment_country_list.view.*
 
 class CountryFragment : Fragment() {
@@ -34,8 +39,18 @@ class CountryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_country_list, container, false).apply {
+        (activity as AppCompatActivity).supportActionBar?.show()
 
-        activity?.title = region.name
+        ViewCompat.setTransitionName(img_region_photo, "region_photo${region.name}")
+        img_region_photo.setImageResource(region.getRegionPhoto())
+        region
+            .also { activity?.title = it.name }
+            .getRegionPhoto()
+            .let(resources::getDrawable).toBitmap()
+            .let(::createPaletteSync)
+            .getDominantColor(resources.getColor(R.color.off_white))
+            .run(::setBackgroundColor)
+
 
         // Set the adapter
         with(regions_recycler_view) {

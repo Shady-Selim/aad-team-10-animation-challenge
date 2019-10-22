@@ -9,14 +9,26 @@
         android:id="@+id/regions_recycler_view"
         android:name="com.aad.alc4.team10.animatedweatherapp.ui.main.CountryFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:windowContentTransitions="true"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_region_photo"
         tools:context=".ui.main.country_screen.CountryFragment"
         tools:listitem="@layout/fragment_country" />
+
+    <ImageView
+        android:id="@+id/img_region_photo"
+        android:layout_width="253dp"
+        android:layout_height="196dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/africa" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

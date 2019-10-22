@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
@@ -51,14 +52,17 @@ class CityFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_city_list, container, false).apply {
+        (activity as AppCompatActivity).supportActionBar?.hide()
         val photoTransitionName = "country_photo-${country.short}"
         val nameTransitionName = "country_name-${country.short}"
         ViewCompat.setTransitionName(img_country_photo, photoTransitionName)
         ViewCompat.setTransitionName(txt_country_name, nameTransitionName)
-        //activity?.title = country.name
-        activity?.actionBar?.hide()
-        img_country_photo.setImageResource(country.getCountryPhotoRec())
-        txt_country_name.text = country.name
+
+        with(country) {
+            img_country_photo.setImageResource(getCountryPhotoRec())
+            txt_country_name.text = name
+        }
+
         // Set the adapter
         with(cities_recycler_view) {
             layoutManager = LinearLayoutManager(context)
