@@ -15,7 +15,8 @@
             app:enterAnim="@anim/translate_up"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/translate_down"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/regionFragment" />
     </fragment>
     <fragment
         android:id="@+id/countryFragment"
@@ -24,7 +25,12 @@
         tools:layout="@layout/fragment_country_list" >
         <action
             android:id="@+id/action_countryFragment_to_cityFragment"
-            app:destination="@id/cityFragment" />
+            app:destination="@id/cityFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/countryFragment" />
         <argument
             android:name="exportedRegion"
             app:argType="com.aad.alc4.team10.animatedweatherapp.model.Region" />
@@ -36,7 +42,9 @@
         tools:layout="@layout/fragment_city_list" >
         <action
             android:id="@+id/action_cityFragment_to_cityForecast"
-            app:destination="@id/cityForecast" />
+            app:destination="@id/cityForecast"
+            app:popUpTo="@+id/cityFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="exportedcountry"
             app:argType="com.aad.alc4.team10.animatedweatherapp.model.Country" />

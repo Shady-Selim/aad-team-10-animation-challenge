@@ -1,8 +1,6 @@
 package com.aad.alc4.team10.animatedweatherapp.ui.main.region_screen
 
-import com.aad.alc4.team10.animatedweatherapp.model.Region
 import android.graphics.Bitmap
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.palette.graphics.Palette
+import androidx.recyclerview.widget.RecyclerView
 import com.aad.alc4.team10.animatedweatherapp.R
+import com.aad.alc4.team10.animatedweatherapp.model.Region
+import com.aad.alc4.team10.animatedweatherapp.model.getRegionPhoto
 
 fun createPaletteSync(bitmap: Bitmap): Palette = Palette.from(bitmap).generate()
 
@@ -25,24 +29,35 @@ class RegionViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
     private val card by lazy { mView.findViewById<CardView>(R.id.item_region_card_view) }
 
     fun bind(region: Region) = region
-        .also { photo.setImageResource(setRegionPhoto(it)) }
+        .also { photo.setImageResource(it.getRegionPhoto()) }
         .apply { nameTextView.text = name }
-        .let { createPaletteSync(mView.context.resources.getDrawable(setRegionPhoto(it)).toBitmap()) }
+        .also { handleOnClick(it) }
+        .let { createPaletteSync(mView.context.resources.getDrawable(it.getRegionPhoto()).toBitmap()) }
         .run { card.setCardBackgroundColor(getDominantColor(mView.resources.getColor(R.color.off_white))) }
 
-    private fun setRegionPhoto(region: Region): Int = when (region.name) {
-        "MENA" -> R.drawable.mena
-        "Africa" -> R.drawable.africa
-        "Asia" -> R.drawable.asia
-        "Europe" -> R.drawable.europe
-        else -> R.drawable.earth
+    private fun handleOnClick(region: Region) = with(itemView) {
+        setOnClickListener { startCountriesScreen(region) }
+
     }
+
+
+    private fun startCountriesScreen(region: Region) = RegionFragmentDirections
+        .actionRegionFragmentToCountryFragment(region)
+        .let { action ->
+            "region_photo${region.name}"
+                .also { ViewCompat.setTransitionName(photo, it) }
+                .let { FragmentNavigatorExtras(photo to it) }
+                .also { extras ->
+                    itemView.findNavController()
+                        .navigate(action.actionId, action.arguments, null, extras)
+                }
+
+        }
 }
 
 class MyRegionRecyclerViewAdapter(
     lifecycleOwner: LifecycleOwner,
-    private val regions: MutableLiveData<List<Region>?>,
-    private val onClick: (Region) -> Unit
+    private val regions: MutableLiveData<List<Region>?>
 ) : RecyclerView.Adapter<RegionViewHolder>() {
 
     init {
@@ -59,6 +74,5 @@ class MyRegionRecyclerViewAdapter(
         holder: RegionViewHolder,
         position: Int
     ) = regions.value!![position]
-        .also { holder.bind(it) }
-        .let { region -> holder.mView.setOnClickListener { onClick(region) } }
+        .let { holder.bind(it) }
 }
