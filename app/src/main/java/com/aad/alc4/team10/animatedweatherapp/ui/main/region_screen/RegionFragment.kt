@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.transition.TransitionInflater
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.ui.main.dummy.DummyContent.DummyItem
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter
 import kotlinx.android.synthetic.main.fragment_region_list.*
 
 class RegionFragment : Fragment() {
@@ -40,11 +42,19 @@ class RegionFragment : Fragment() {
     }
 
     private fun drawRegionRecycler() = with(regions_recycler_view) {
-        layoutManager = GridLayoutManager(context, 2)
-        adapter = MyRegionRecyclerViewAdapter(
+        layoutManager = GridLayoutManager(context, 1)
+        val alphaAdapter = AlphaInAnimationAdapter(MyRegionRecyclerViewAdapter(
             this@RegionFragment,
             viewModel.regionsLiveData
         )
+        ).apply {
+            // Change the durations.
+            setDuration(3000)
+            // Disable the first scroll mode.
+            setFirstOnly(false)
+        }
+        adapter = ScaleInAnimationAdapter(alphaAdapter)
+
     }
 
 
