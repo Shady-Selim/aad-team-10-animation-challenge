@@ -20,15 +20,18 @@
 
     <TextView
         android:id="@+id/tv_city_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:textSize="22sp"
-        android:textColor="#ffffff"
+        android:textColor="@android:color/darker_gray"
+        android:transitionName="@string/transition_city_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Cairo" />
+        tools:text="Cairo"
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/tv_forecast_date"

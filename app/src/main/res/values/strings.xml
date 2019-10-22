@@ -7,4 +7,5 @@
     </string>
     <string name="error">Error</string>
     <string name="try_again">Try Again</string>
+    <string name="transition_city_name">transition_string</string>
 </resources>

@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.forecast_Screen.CityForecast">
 
+    <TextView
+        android:id="@+id/tv_city_name_forecast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="22sp"
+        android:textColor="@android:color/darker_gray"
+        android:gravity="center"
+        android:transitionName="@string/transition_city_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:elevation="4dp"
+        tools:text="Cairo" />
+
     <ImageView
         android:id="@+id/img_error"
         android:layout_width="140dp"

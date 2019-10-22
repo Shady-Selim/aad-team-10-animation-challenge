@@ -10,17 +10,19 @@ import androidx.core.animation.doOnCancel
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.transition.TransitionInflater
 import com.aad.alc4.team10.animatedweatherapp.R
 import com.aad.alc4.team10.animatedweatherapp.core.showAnimator
+import com.aad.alc4.team10.animatedweatherapp.model.City
 import com.aad.alc4.team10.animatedweatherapp.ui.Forecast
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.city_forecast_fragment.*
 import kotlinx.android.synthetic.main.city_forecast_fragment.view.*
 
-const val CAIRO_ID = "360630"
 
 class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandler {
     companion object {
+        private  var mCity: City? =null
 
         fun newInstance() =
             CityForecast()
@@ -41,6 +43,18 @@ class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandl
     }
     private val errorObjectAnimator by lazy { img_error.showAnimator() }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            mCity=  it.getParcelable("city")
+        }
+
+        sharedElementEnterTransition= TransitionInflater.from(context)
+            .inflateTransition(android.R.transition.move)
+            .apply {
+                duration =700
+            }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,16 +67,18 @@ class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandl
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         initViewModel()
-
-
     }
 
     private fun initViewModel() = viewModel.run {
         loading.observe(this@CityForecast, Observer { onLoading(it) })
-        loadForecast(CAIRO_ID, ::onError)
-
+        city.let {
+            tv_city_name_forecast.text = "$it.cityName , $it.countryName"
+        }
+        mCity?.let {
+            loadForecast(it.zip.toString(), ::onError)
+            tv_city_name_forecast.text=it.name
+        }
     }
 
     private fun onLoading(loading: Boolean) {
@@ -120,7 +136,7 @@ class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandl
             .make(rv_city_forecasts_list, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
             .setAction(getString(R.string.try_again)) {
                 onError(false)
-                viewModel.loadForecast(CAIRO_ID, ::onError)
+                viewModel.loadForecast(mCity?.zip.toString(), ::onError)
             }
             .show()
     }
