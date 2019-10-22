@@ -96,19 +96,19 @@ class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandl
     private fun showErrorImage(): Unit = with(img_error) {
         scaleX = 0f
         scaleY = 0f
-        visibility = View.VISIBLE
         animate().apply {
             cancel()
             duration = 500
             scaleX(1f)
             scaleY(1f)
+            visibility = View.VISIBLE
+
             setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator?) {
                     errorObjectAnimator.start()
                 }
             }
             )
-            start()
         }
     }
 
@@ -127,7 +127,6 @@ class CityForecast : Fragment(), CityForecastAdapter.ForecastAdapterOnClickHandl
 
                 }
             })
-            start()
         }
     }
 
