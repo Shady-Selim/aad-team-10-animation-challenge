@@ -24,17 +24,14 @@ class CityForecastAdapter(
     private val forecastsLiveData: LiveData<List<Forecast>>,
     private val cityLiveData: LiveData<City>,
     owner: LifecycleOwner,
-    private val mContext: Context,
-    private val mClickHandler: ForecastAdapterOnClickHandler
+    private val mContext: Context
 ) : RecyclerView.Adapter<CityForecastAdapter.CityForecastAdapterViewHolder>() {
 
     private lateinit var mWeathers: List<Weather>
 
     private val mUseTodayLayout: Boolean
 
-    interface ForecastAdapterOnClickHandler {
-        fun onClick(forecast: Forecast)
-    }
+
 
     init {
         forecastsLiveData.observe(owner, androidx.lifecycle.Observer { notifyDataSetChanged() })
@@ -165,8 +162,7 @@ class CityForecastAdapter(
         }
     }
 
-    inner class CityForecastAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view),
-        View.OnClickListener {
+    inner class CityForecastAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val iconView: ImageView
 
         val dateView: TextView
@@ -187,13 +183,9 @@ class CityForecastAdapter(
             cityName = view.findViewById<View>(R.id.tv_city_name) as TextView
             dateTime = view.findViewById<View>(R.id.tv_date_time_id) as TextView
             container = view.findViewById<View>(R.id.container) as? ConstraintLayout
-            view.setOnClickListener(this)
         }
 
-        override fun onClick(v: View) {
 
-            mClickHandler.onClick(getItemAtPosition(adapterPosition))
-        }
     }
 
     private fun checkIfToday(timeStamp: Long): String {
