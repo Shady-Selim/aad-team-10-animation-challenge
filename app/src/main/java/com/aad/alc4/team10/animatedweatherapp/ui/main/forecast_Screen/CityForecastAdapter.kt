@@ -32,7 +32,6 @@ class CityForecastAdapter(
     private val mUseTodayLayout: Boolean
 
 
-
     init {
         forecastsLiveData.observe(owner, androidx.lifecycle.Observer { notifyDataSetChanged() })
         cityLiveData.observe(owner, androidx.lifecycle.Observer { notifyDataSetChanged() })
@@ -94,12 +93,12 @@ class CityForecastAdapter(
             }
 
             VIEW_TYPE_FUTURE_DAY -> {
-                when(weather.icon){
+                when (weather.icon) {
                     "01d" -> Glide.with(mContext).load(mContext.resources.getDrawable(R.drawable.ic_clear))
                         .into(holder.iconView)
                     "01n" -> Glide.with(mContext).load(mContext.resources.getDrawable(R.drawable.ic_noun_clear_night))
                         .into(holder.iconView)
-                    else -> Glide.with(mContext).load("https://www.openweathermap.org/img/wn/"+weather.icon+"@2x.png")
+                    else -> Glide.with(mContext).load("https://www.openweathermap.org/img/wn/" + weather.icon + "@2x.png")
                         .into(holder.iconView)
                 }
 //                weatherImageId = ForecastUtils
@@ -124,26 +123,25 @@ class CityForecastAdapter(
 
         holder.highTempView.text = highString
 
-        val lowInCelsius = forecastDetails.minimumTemperature!!
+        SimpleDateFormat("yyyy-MM-dd hh:mm a")
+            .format(date * 1000)
+            .also { holder.dateTime.text = it }
 
-        val lowString = ForecastUtils.formatTemperature(mContext, lowInCelsius - 273.15)
-
-        holder.lowTempView.text = lowString
-
-        holder.dateTime.text = dateText
 
         // bind data here
 
         // we apply animation to views here
         // first lets create an animation for user photo
-        holder.iconView.animation = AnimationUtils.loadAnimation(mContext,R.anim.fade_transition_animation)
+        holder.iconView.animation =
+            AnimationUtils.loadAnimation(mContext, R.anim.fade_transition_animation)
 
         // lets create the animation for the whole card
         // first lets create a reference to it
         // you ca use the previous same animation like the following
 
         // but i want to use a different one so lets create it ..
-        holder.container?.animation = AnimationUtils.loadAnimation(mContext,R.anim.fade_scale_animation)
+        holder.container?.animation =
+            AnimationUtils.loadAnimation(mContext, R.anim.fade_scale_animation)
     }
 
     override fun getItemCount(): Int {
@@ -168,10 +166,9 @@ class CityForecastAdapter(
         val dateView: TextView
         val descriptionView: TextView
         val highTempView: TextView
-        val lowTempView: TextView
         val cityName: TextView
         val dateTime: TextView
-        var container : ConstraintLayout? = null
+        var container: ConstraintLayout? = null
 
         init {
 
@@ -179,7 +176,6 @@ class CityForecastAdapter(
             dateView = view.findViewById<View>(R.id.tv_forecast_date) as TextView
             descriptionView = view.findViewById<View>(R.id.tv_forecast_description) as TextView
             highTempView = view.findViewById<View>(R.id.tv_high_temperature) as TextView
-            lowTempView = view.findViewById<View>(R.id.tv_low_temperature) as TextView
             cityName = view.findViewById<View>(R.id.tv_city_name) as TextView
             dateTime = view.findViewById<View>(R.id.tv_date_time_id) as TextView
             container = view.findViewById<View>(R.id.container) as? ConstraintLayout

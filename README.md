@@ -1,5 +1,5 @@
 # aad-team-10-animation-challenge
-This is our team final collaborative graduation project from Google Africa Developer Scholarship Phase II 
+This is our team final collaborative graduation project from Google Africa Developer Scholarship Phase II
 
 ## Team Members:
 - Ashraf Sarhan       https://github.com/ashrafsarhan
@@ -19,3 +19,11 @@ This is our team final collaborative graduation project from Google Africa Devel
 - Omneya Osman	      https://github.com/OmneyaOsman
 - Khalid El-nagar     https://github.com/khalid-3lnagar
 - Andrew Safwat       https://github.com/andrewsafwatsamuel
+## App Media
+
+| ![Home Screen - Regions](demos/anim_1.gif) | ![Countries](demos/anim_2.gif) | ![Cities](demos/anim_3.gif) |
+|:---:|:---:|:---:|
+ |![City Forecast](demos/anim_4.gif)|![Forecast animation](demos/anim_5.gif)|![Regions Er](demos/anim_6.gif)|
+
+ ##  kanban board
+ ![kanban board](demos/knaban_board.png)

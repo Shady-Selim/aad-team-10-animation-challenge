@@ -89,18 +89,6 @@
         tools:text="19\u00b0" />
 
     <TextView
-        android:id="@+id/tv_low_temperature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:textColor="#ffffff"
-        android:textSize="36sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_forecast_description"
-        app:layout_constraintLeft_toLeftOf="@+id/tv_high_temperature"
-        app:layout_constraintRight_toRightOf="@+id/tv_high_temperature"
-        tools:text="10\u00b0"/>
-
-    <TextView
         android:id="@+id/tv_date_time_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
