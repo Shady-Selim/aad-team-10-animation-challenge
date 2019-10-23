@@ -24,7 +24,7 @@ class RegionsViewModel(
         get() = _loading
 
     fun getRegions(isConnected: Boolean, onError: (Boolean) -> Unit) {
-        viewModelScope.launch {
+        regionsLiveData.value ?: viewModelScope.launch {
             if (!isConnected) {
                 withContext(Dispatchers.Main) { onError(true) }
                 return@launch
