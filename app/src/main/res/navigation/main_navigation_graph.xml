@@ -12,9 +12,9 @@
         <action
             android:id="@+id/action_regionFragment_to_countryFragment"
             app:destination="@id/countryFragment"
-            app:enterAnim="@anim/translate_up"
+            app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/translate_down"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@+id/regionFragment" />
     </fragment>

@@ -118,7 +118,7 @@ class RegionFragment : Fragment() {
             )
         ).apply {
             // Change the durations.
-            setDuration(2500)
+            setDuration(1000)
             // Disable the first scroll mode.
             setFirstOnly(false)
         }
