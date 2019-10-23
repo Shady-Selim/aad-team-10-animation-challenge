@@ -13,9 +13,10 @@ This is our team final collaborative graduation project from Google Africa Devel
 - Hady Walied         https://github.com/hadywalied
 ## App Media
 
-| ![Home Screen - Regions](demos/anim_1.gif) | ![Countries](demos/anim_2.gif) | ![Cities](demos/anim_3.gif) |
-|:---:|:---:|:---:|
- |![City Forecast](demos/anim_4.gif)|![Forecast animation](demos/anim_5.gif)|![Regions Er](demos/anim_6.gif)|
+| ![Home Screen - Regions](demos/anim_1.gif) | ![Countries](demos/anim_2.gif) |
+|:---:|:---:|
+| ![Cities](demos/anim_3.gif)  |![City Forecast](demos/anim_4.gif)|
+|![Forecast animation](demos/anim_5.gif)|![Regions Er](demos/anim_6.gif)|
 
  ##  kanban board
 Kanban maximizes the productivity of the team by reducing idle time and helps to maximize resources lies in the ability to continuously deliver product while continuously improving the process required to achieve the main goal.
